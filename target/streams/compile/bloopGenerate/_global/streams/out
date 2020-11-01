@@ -1,0 +1,4 @@
+[debug] [tryingout] Classpath dependencies List()
+[debug] [tryingout] Dependencies from configurations List()
+[debug] Bloop wrote the configuration of project 'tryingout' to '/Users/jerem/cours_esiee_paris/E5/scala_code/tryingout/.bloop/tryingout.json'
+[success] Generated .bloop/tryingout.json

@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/jerem/cours_esiee_paris/E5/scala_code/tryingout/src/main/scala/Main.scala:26:27: (Int, Int) does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m    game.updateBoard(coord(0),coord(1),turn)[0m
+[0m[[0m[31merror[0m] [0m[0m                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jerem/cours_esiee_paris/E5/scala_code/tryingout/src/main/scala/Main.scala:26:36: (Int, Int) does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m    game.updateBoard(coord(0),coord(1),turn)[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
