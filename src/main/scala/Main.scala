@@ -12,6 +12,14 @@ object Main extends App {
     val player1 = new Player('X')
     val player2 = new Player('O')
 
+
+    //le board est quadrillé comme suit : 
+    //   A B C
+    // 1 . . .
+    // 2 . . .
+    // 3 . . .
+
+
     game.showBoard()
 
     //var turn = player1.letter
@@ -22,6 +30,12 @@ object Main extends App {
     println(s"tu as choisi : $move")
 
     var coord = game.getCoord(move)
+
+    if(coord == (-1,-1)){
+      println("Position Invalide")
+      println(s"Le joueur $playerTurn rejoue")
+      play(game,playerTurn)
+    }
 
     var state = game.updateBoard(coord._1,coord._2,playerTurn)
 
@@ -40,24 +54,6 @@ object Main extends App {
 
     //play(game, nextplayer)
     
-    
-    
-    
-    // game.state match {
-    //   case Win(player) => println(s"$player won the game :)")
-    //   case NoMoreMoves() => println("No more moves to make :(")
-    //   case InProgress() => {
-    //     try {
-    //       println("your turn")
-    //       play(game)
-    //     }catch {
-    //       case e: Throwable => {
-    //         println("Une erreur est survenue")
-    //         play(game)
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   def whosNext(playerturn : Char) = {
