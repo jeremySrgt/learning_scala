@@ -191,7 +191,7 @@
         "platform": {
             "name": "jvm",
             "config": {
-                "home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre",
+                "home": "/usr/local/Cellar/openjdk/14.0.1/libexec/openjdk.jdk/Contents/Home",
                 "options": [
                     "-Duser.dir=/Users/jerem/cours_esiee_paris/E5/scala_code/tryingout/project"
                 ]

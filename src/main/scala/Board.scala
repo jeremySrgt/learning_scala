@@ -14,10 +14,36 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
     //     board foreach{ row => row foreach print; println}
     // }
 
-    def updateBoard(row : Int, col : Int, playerLetter : Char){
+    def updateBoard(row : Int, col : Int, playerLetter : Char): String = {
 
-        board(row)(col) = playerLetter
+       if(board(row)(col) == '.'){
+           board(row)(col) = playerLetter
+
+           if (checkWin()== true){
+               "win"
+           }else{
+               "next"
+           }
+       }else{
+           "retry"
+       }
+        
     }
+
+    def checkWin(): Boolean = {
+        if(board(0)(0) == board(1)(0) && board(1)(0)== board(2)(0)){
+            true
+        }else if(board(0)(0) == board(0)(1) && board(0)(1) == board(0)(2)){
+            true
+        }else if(board(0)(0) == board(1)(1) && board(1)(1) == board(2)(2)){
+            true
+        }else{
+            false
+        }
+    }
+    // def checkBoard(row: Int, col: Int){
+        
+    // }
 
 
     def getCoord(position : String): (Int,Int) = {

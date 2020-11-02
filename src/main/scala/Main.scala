@@ -14,18 +14,31 @@ object Main extends App {
 
     game.showBoard()
 
-    var turn = player1.letter
+    //var turn = player1.letter
 
-    println(s"Au tour du jouer $turn")
+    println(s"Au tour du jouer $playerTurn")
 
     var move = readLine("ou joue tu ?")
     println(s"tu as choisi : $move")
 
     var coord = game.getCoord(move)
 
-    game.updateBoard(coord._1,coord._2,turn)
+    var state = game.updateBoard(coord._1,coord._2,playerTurn)
 
-    play(game)
+    if(state == "next"){
+        val nextplayer = whosNext(playerTurn)
+        play(game,nextplayer)
+    }else if(state == "retry"){
+      println(s"Le joueur $playerTurn rejoue")
+      play(game,playerTurn)
+    }else if(state == "win"){
+      game.showBoard()
+      println(s"Joueur $playerTurn a Gagné")
+    }
+
+    
+
+    //play(game, nextplayer)
     
     
     
@@ -45,6 +58,14 @@ object Main extends App {
     //     }
     //   }
     // }
+  }
+
+  def whosNext(playerturn : Char) = {
+    if(playerturn == 'X'){
+        'O'
+    }else{
+      'X'
+    }
   }
 
   play()
