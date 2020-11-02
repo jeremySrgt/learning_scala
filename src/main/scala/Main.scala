@@ -31,7 +31,7 @@ object Main extends App {
 
     var coord = game.getCoord(move)
 
-    if(coord == (-1,-1)){
+    if(coord._1 == -100 && coord._2 == -100){
       println("Position Invalide")
       println(s"Le joueur $playerTurn rejoue")
       play(game,playerTurn)
@@ -50,9 +50,6 @@ object Main extends App {
       println(s"Joueur $playerTurn a Gagné")
     }
 
-    
-
-    //play(game, nextplayer)
     
   }
 

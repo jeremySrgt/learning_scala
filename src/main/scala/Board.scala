@@ -32,15 +32,6 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
     }
 
     def checkWin(row: Int, col: Int, playerLetter : Char): Boolean = {
-        // if(board(0)(0) == board(1)(0) && board(1)(0)== board(2)(0)){
-        //     true
-        // }else if(board(0)(0) == board(0)(1) && board(0)(1) == board(0)(2)){
-        //     true
-        // }else if(board(0)(0) == board(1)(1) && board(1)(1) == board(2)(2)){
-        //     true
-        // }else{
-        //     false
-        // }
         
         //check colones
         breakable{
@@ -97,9 +88,6 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
         
 
     }
-    // def checkBoard(row: Int, col: Int){
-        
-    // }
 
 
     def getCoord(position : String): (Int,Int) = {
@@ -110,7 +98,7 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
         if(coordMap.contains(position)){
             coordMap(position.toString())
         }else{
-            (-1,-1)
+            (-100,-100)
         }
 
     }
