@@ -8,7 +8,11 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
     }
 
     def showBoard() : Unit = {
-        board foreach{ row => row foreach print; println}
+        // board foreach{ row => row foreach print; println}
+        board.foreach{
+            case(row) => row.foreach{case(position)=> print("| ") ; print(position)}
+            println
+        }
     }
 
     // override def toString(): String = {

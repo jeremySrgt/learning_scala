@@ -24,7 +24,7 @@ object Main extends App {
 
     //var turn = player1.letter
 
-    println(s"Au tour du jouer $playerTurn")
+    println(s"Au tour du joueur $playerTurn")
 
     var move = readLine("ou joue tu ?")
     println(s"tu as choisi : $move")
