@@ -45,6 +45,9 @@ object Main extends App {
     }else if(state == "retry"){
       println(s"Le joueur $playerTurn rejoue")
       play(game,playerTurn)
+    }else if(state == "full"){
+      game.showBoard()
+      println("Le board est full plus de move possible")
     }else if(state == "win"){
       game.showBoard()
       println(s"Joueur $playerTurn a Gagné")

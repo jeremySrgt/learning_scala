@@ -22,6 +22,8 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
 
            if (checkWin(row,col,playerLetter)== true){
                "win"
+           }else if(checkFull() == true){
+               "full"
            }else{
                "next"
            }
@@ -87,6 +89,20 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
         return false
         
 
+    }
+
+    def checkFull() : Boolean = {
+        breakable {
+            for(i <- 0 to 2; j <- 0 to 2){
+                if(board(i)(j) == '.'){
+                    break
+                }
+                if(i == 2 && j == 2){
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 
