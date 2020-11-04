@@ -71,20 +71,41 @@ object Main extends App {
 
   var playerTurn: Char = whosNext('O') 
 
-  var A1: Char = '_'
-  var A2: Char = '_'
-  var A3: Char = '_'
-  var B1: Char = '_'
-  var B2: Char = '_'
-  var B3: Char = '_'
-  var C1: Char = '_'
-  var C2: Char = '_'
-  var C3: Char = '_'
+  var buttonEmptyText = "_"
 
-  def handleButtonAction(button: Button, turn: Label){
-    button.text = playerTurn.toString()
-    playerTurn = whosNext(playerturn = playerTurn)
-    turn.text = s"Au tour du joueur $playerTurn"
+  val board = new Board
+  var boardState = "" // solution pas viable, il faut changer dans le board 
+  // lui donner une variable etat pour pouvoir y acced
+  // board.state et avoir l'etat 
+  // et dans le update board dans Board checker l'etat avant chaque MaJ du board
+
+  def handleButtonAction(button: Button, turn: Label, info: Label, replay : Button){
+    if(boardState == "win"){
+      button.enabled = false
+      info.text += "<- <-"
+    }
+
+    if(button.text == "_"){
+      button.text = playerTurn.toString()
+
+      var coord = board.getCoord(button.name)
+      var state = board.updateBoard(coord._1,coord._2,playerLetter = playerTurn)
+      boardState = state
+
+      if(state == "full"){
+        info.text = "Le board est full plus de move possible"
+        replay.visible = true
+      }else if(state == "win"){
+        info.text = s"Joueur $playerTurn a Gagné"
+        replay.visible = true
+        //ajouter un bouton pour rejouer qui à la base est vide
+      }
+
+
+      playerTurn = whosNext(playerturn = playerTurn)
+      turn.text = s"Au tour du joueur $playerTurn"
+      println(board.showBoard())
+    }
   }
 
   val frame = new MainFrame {
@@ -95,56 +116,77 @@ object Main extends App {
       text = "Au tour du Joueur X"
     }
 
+    val infoMessage = new Label {
+      text = "..."
+    }
+
+    val replay = new Button("Rejouer ?"){
+      name = "replay"
+      visible = false
+      reactions += {
+        case event.ButtonClicked(_) => println("replay")
+      }
+    }
+
     val firstRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button(A1.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "A1"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(B1.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "B1"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(C1.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "C1"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
       }
 
       val secondRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button(A2.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "A2"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(B2.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "B2"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(B3.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "C2"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
       }
 
       val thirdRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button(A3.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "A3"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(B3.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "B3"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         }
-        contents += new Button(C3.toString()){
+        contents += new Button(buttonEmptyText){
+          name = "C3"
           reactions += {
-            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+            case event.ButtonClicked(_) => handleButtonAction(this,turn,infoMessage,replay)
           }
         } 
       }
@@ -154,6 +196,8 @@ object Main extends App {
         contents += secondRow
         contents += thirdRow
         contents += turn
+        contents += infoMessage
+        contents += replay
       }
 
     centerOnScreen()
