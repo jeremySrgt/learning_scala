@@ -74,13 +74,13 @@ object Main extends App {
   var buttonEmptyText = "_"
 
   val board = new Board
-  var boardState = "" // solution pas viable, il faut changer dans le board 
+  // solution pas viable, il faut changer dans le board 
   // lui donner une variable etat pour pouvoir y acced
   // board.state et avoir l'etat 
   // et dans le update board dans Board checker l'etat avant chaque MaJ du board
 
   def handleButtonAction(button: Button, turn: Label, info: Label, replay : Button){
-    if(boardState == "win"){
+    if(board.state == "win"){
       button.enabled = false
       info.text += "<- <-"
     }
@@ -89,13 +89,12 @@ object Main extends App {
       button.text = playerTurn.toString()
 
       var coord = board.getCoord(button.name)
-      var state = board.updateBoard(coord._1,coord._2,playerLetter = playerTurn)
-      boardState = state
+      board.updateBoard(coord._1,coord._2,playerLetter = playerTurn)
 
-      if(state == "full"){
+      if(board.state == "full"){
         info.text = "Le board est full plus de move possible"
         replay.visible = true
-      }else if(state == "win"){
+      }else if(board.state == "win"){
         info.text = s"Joueur $playerTurn a Gagné"
         replay.visible = true
         //ajouter un bouton pour rejouer qui à la base est vide
