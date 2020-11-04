@@ -1,6 +1,6 @@
 //test branch GUI
 import scala.io.StdIn.readLine
-
+import scala.swing._
 
 import Player.Player
 import Board.Board
@@ -65,5 +65,41 @@ object Main extends App {
     }
   }
 
-  play()
+  //play()
+
+  val frame = new MainFrame {
+    title = "Test swing scala"
+    minimumSize = new Dimension(500,500)
+
+    val firstRow = new BoxPanel(Orientation.Horizontal){
+        contents += new Button('_'.toString())
+        contents += new Button("__")
+        contents += new Button("__") 
+      }
+
+      val secondRow = new BoxPanel(Orientation.Horizontal){
+        contents += new Button("__")
+        contents += new Button("__")
+        contents += new Button("__") 
+      }
+
+      val thirdRow = new BoxPanel(Orientation.Horizontal){
+        contents += new Button("__")
+        contents += new Button("__")
+        contents += new Button("__") 
+      }
+
+      contents = new BoxPanel(Orientation.Vertical) {
+        contents += firstRow
+        contents += secondRow
+        contents += thirdRow
+      }
+
+    centerOnScreen()
+  }
+
+  frame.visible = true
+  // pack()
+  // centerOnScreen()
+  // open()
 }
