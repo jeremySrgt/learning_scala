@@ -67,26 +67,40 @@ object Main extends App {
 
   //play()
 
+  var A1: Char = '_'
+  var A2: Char = '_'
+  var A3: Char = '_'
+  var B1: Char = '_'
+  var B2: Char = '_'
+  var B3: Char = '_'
+  var C1: Char = '_'
+  var C2: Char = '_'
+  var C3: Char = '_'
+
   val frame = new MainFrame {
     title = "Test swing scala"
     minimumSize = new Dimension(500,500)
 
     val firstRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button('_'.toString())
-        contents += new Button("__")
-        contents += new Button("__") 
+        contents += new Button(A1.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => play()
+          }
+        }
+        contents += new Button(B1.toString())
+        contents += new Button(C1.toString()) 
       }
 
       val secondRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button("__")
-        contents += new Button("__")
-        contents += new Button("__") 
+        contents += new Button(A2.toString())
+        contents += new Button(B2.toString())
+        contents += new Button(B3.toString()) 
       }
 
       val thirdRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button("__")
-        contents += new Button("__")
-        contents += new Button("__") 
+        contents += new Button(A3.toString())
+        contents += new Button(B3.toString())
+        contents += new Button(C3.toString()) 
       }
 
       contents = new BoxPanel(Orientation.Vertical) {
