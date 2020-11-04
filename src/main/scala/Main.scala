@@ -67,6 +67,10 @@ object Main extends App {
 
   //play()
 
+
+
+  var playerTurn: Char = whosNext('O') 
+
   var A1: Char = '_'
   var A2: Char = '_'
   var A3: Char = '_'
@@ -77,41 +81,87 @@ object Main extends App {
   var C2: Char = '_'
   var C3: Char = '_'
 
+  def handleButtonAction(button: Button, turn: Label){
+    button.text = playerTurn.toString()
+    playerTurn = whosNext(playerturn = playerTurn)
+    turn.text = s"Au tour du joueur $playerTurn"
+  }
+
   val frame = new MainFrame {
     title = "Test swing scala"
     minimumSize = new Dimension(500,500)
 
+    val turn = new Label {
+      text = "Au tour du Joueur X"
+    }
+
     val firstRow = new BoxPanel(Orientation.Horizontal){
         contents += new Button(A1.toString()){
           reactions += {
-            case event.ButtonClicked(_) => play()
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
           }
         }
-        contents += new Button(B1.toString())
-        contents += new Button(C1.toString()) 
+        contents += new Button(B1.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
+        contents += new Button(C1.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
       }
 
       val secondRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button(A2.toString())
-        contents += new Button(B2.toString())
-        contents += new Button(B3.toString()) 
+        contents += new Button(A2.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
+        contents += new Button(B2.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
+        contents += new Button(B3.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
       }
 
       val thirdRow = new BoxPanel(Orientation.Horizontal){
-        contents += new Button(A3.toString())
-        contents += new Button(B3.toString())
-        contents += new Button(C3.toString()) 
+        contents += new Button(A3.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
+        contents += new Button(B3.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        }
+        contents += new Button(C3.toString()){
+          reactions += {
+            case event.ButtonClicked(_) => handleButtonAction(this,turn)
+          }
+        } 
       }
 
       contents = new BoxPanel(Orientation.Vertical) {
         contents += firstRow
         contents += secondRow
         contents += thirdRow
+        contents += turn
       }
 
     centerOnScreen()
   }
 
+
+  //faire un bouton rejouer qui relance le run 
+  // ou reset simplemement la board
   frame.visible = true
   // pack()
   // centerOnScreen()
