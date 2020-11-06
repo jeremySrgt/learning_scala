@@ -38,18 +38,18 @@ object Main extends App {
       play(game,playerTurn)
     }
 
-    var state = game.updateBoard(coord._1,coord._2,playerTurn)
+    game.updateBoard(coord._1,coord._2,playerTurn)
 
-    if(state == "next"){
+    if(game.state == "next"){
         val nextplayer = whosNext(playerTurn)
         play(game,nextplayer)
-    }else if(state == "retry"){
+    }else if(game.state == "retry"){
       println(s"Le joueur $playerTurn rejoue")
       play(game,playerTurn)
-    }else if(state == "full"){
+    }else if(game.state == "full"){
       game.showBoard()
       println("Le board est full plus de move possible")
-    }else if(state == "win"){
+    }else if(game.state == "win"){
       game.showBoard()
       println(s"Joueur $playerTurn a Gagné")
     }
@@ -74,16 +74,8 @@ object Main extends App {
   var buttonEmptyText = "_"
 
   val board = new Board
-  // solution pas viable, il faut changer dans le board 
-  // lui donner une variable etat pour pouvoir y acced
-  // board.state et avoir l'etat 
-  // et dans le update board dans Board checker l'etat avant chaque MaJ du board
 
   def handleButtonAction(button: Button, turn: Label, info: Label, replay : Button){
-    if(board.state == "win"){
-      button.enabled = false
-      info.text += "<- <-"
-    }
 
     if(button.text == "_"){
       button.text = playerTurn.toString()
@@ -98,6 +90,12 @@ object Main extends App {
         info.text = s"Joueur $playerTurn a Gagné"
         replay.visible = true
         //ajouter un bouton pour rejouer qui à la base est vide
+      }
+
+      if(board.state == "win"){
+        button.enabled = false
+        turn.visible = false
+        info.foreground = java.awt.Color.RED
       }
 
 
@@ -116,7 +114,6 @@ object Main extends App {
     }
 
     val infoMessage = new Label {
-      text = "..."
     }
 
     val replay = new Button("Rejouer ?"){
