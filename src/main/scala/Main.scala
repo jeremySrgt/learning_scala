@@ -37,18 +37,18 @@ object Main extends App {
       play(game,playerTurn)
     }
 
-    var state = game.updateBoard(coord._1,coord._2,playerTurn)
+    game.updateBoard(coord._1,coord._2,playerTurn)
 
-    if(state == "next"){
+    if(game.state == "next"){
         val nextplayer = whosNext(playerTurn)
         play(game,nextplayer)
-    }else if(state == "retry"){
+    }else if(game.state == "retry"){
       println(s"Le joueur $playerTurn rejoue")
       play(game,playerTurn)
-    }else if(state == "full"){
+    }else if(game.state == "full"){
       game.showBoard()
       println("Le board est full plus de move possible")
-    }else if(state == "win"){
+    }else if(game.state == "win"){
       game.showBoard()
       println(s"Joueur $playerTurn a Gagné")
     }

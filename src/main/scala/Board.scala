@@ -1,7 +1,7 @@
 package Board
 import util.control.Breaks._
 
-class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
+class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var state: String= "next"){
 
     for(i <- 0 to 2; j <- 0 to 2){
         board(i)(j) = '.'
@@ -19,20 +19,20 @@ class Board(val board : Array[Array[Char]] = Array.ofDim(3,3), var t : Int = 3){
     //     board foreach{ row => row foreach print; println}
     // }
 
-    def updateBoard(row : Int, col : Int, playerLetter : Char): String = {
+    def updateBoard(row : Int, col : Int, playerLetter : Char): Unit = {
 
        if(board(row)(col) == '.'){
            board(row)(col) = playerLetter
 
            if (checkWin(row,col,playerLetter)== true){
-               "win"
+               state = "win"
            }else if(checkFull() == true){
-               "full"
+               state = "full"
            }else{
-               "next"
+               state = "next"
            }
        }else{
-           "retry"
+           state = "retry"
        }
         
     }
