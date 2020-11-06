@@ -123,4 +123,10 @@ class Board(val board: Array[Array[Char]] = Array.ofDim(3,3), var state: String=
         }
 
     }
+
+    def replay(){
+        for(i <- 0 to 2; j <- 0 to 2){
+        board(i)(j) = '.'
+    }
+    }
 }

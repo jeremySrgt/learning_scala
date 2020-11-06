@@ -89,24 +89,23 @@ object Main extends App {
       }else if(board.state == "win"){
         info.text = s"Joueur $playerTurn a Gagné"
         replay.visible = true
-        //ajouter un bouton pour rejouer qui à la base est vide
-      }
 
-      if(board.state == "win"){
         button.enabled = false
         turn.visible = false
-        info.foreground = java.awt.Color.RED
+        info.foreground = java.awt.Color.GREEN
+        //ajouter un bouton pour rejouer qui à la base est vide
+      }else{
+        playerTurn = whosNext(playerturn = playerTurn)
+        turn.text = s"Au tour du joueur $playerTurn"
       }
-
-
-      playerTurn = whosNext(playerturn = playerTurn)
-      turn.text = s"Au tour du joueur $playerTurn"
+      
       println(board.showBoard())
+      
     }
   }
 
   val frame = new MainFrame {
-    title = "Test swing scala"
+    title = "Tic Tac Toe by Jeremy"
     minimumSize = new Dimension(500,500)
 
     val turn = new Label {
@@ -123,6 +122,7 @@ object Main extends App {
         case event.ButtonClicked(_) => println("replay")
       }
     }
+
 
     val firstRow = new BoxPanel(Orientation.Horizontal){
         contents += new Button(buttonEmptyText){
