@@ -3,7 +3,7 @@ import scala.io.StdIn.readLine
 
 import Player.Player
 import Board.Board
-import Test.Test
+import Computer.Computer
 
 object Main extends App {
 
@@ -19,6 +19,8 @@ object Main extends App {
     // 2 . . .
     // 3 . . .
 
+    // O = computer
+
 
     game.showBoard()
 
@@ -26,18 +28,28 @@ object Main extends App {
 
     println(s"Au tour du joueur $playerTurn")
 
-    var move = readLine("ou joue tu ?")
-    println(s"tu as choisi : $move")
+    if(playerTurn == 'X'){
+        var move = readLine("ou joue tu ?")
+        println(s"tu as choisi : $move")
 
-    var coord = game.getCoord(move)
+        var coord = game.getCoord(move)
 
-    if(coord._1 == -100 && coord._2 == -100){
-      println("Position Invalide")
-      println(s"Le joueur $playerTurn rejoue")
-      play(game,playerTurn)
+        if(coord._1 == -100 && coord._2 == -100){
+          println("Position Invalide")
+          println(s"Le joueur $playerTurn rejoue")
+          play(game,playerTurn)
+        }
+
+        game.updateBoard(coord._1,coord._2,playerTurn)
+
+    }else{
+      var computer = new Computer(game)
+      var coord = computer.getComputerMove()
+      game.updateBoard(coord._1,coord._2,playerTurn)
     }
 
-    game.updateBoard(coord._1,coord._2,playerTurn)
+
+    
 
     if(game.state == "next"){
         val nextplayer = whosNext(playerTurn)
