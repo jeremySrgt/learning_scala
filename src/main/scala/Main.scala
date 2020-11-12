@@ -44,7 +44,7 @@ object Main extends App {
 
     }else{
       var computer = new Computer(game)
-      var coord = computer.getComputerMove()
+      var coord = computer.findBestMove(game.board)
       game.updateBoard(coord._1,coord._2,playerTurn)
     }
 
